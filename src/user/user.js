@@ -8,8 +8,9 @@ const UserCntrl = new UserController();
 
 const router = express.Router();
 
-router.get('/',UserCntrl.signIn);
-// router.get('/logout',)
+router.get('/',UserCntrl.signIn);        // Same for user Friendly
+router.get('/signIn',UserCntrl.signIn);
+router.get('/signUp',UserCntrl.signUp);
 
 
 

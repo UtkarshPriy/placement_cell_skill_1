@@ -5,8 +5,9 @@ export default class UserController {
 
         res.render('signIn');
 
-
-
+    }
+    signUp = async(req,res,next)=>{
+        res.render('signUp');
     }
 
 };
