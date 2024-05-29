@@ -1,4 +1,4 @@
-import mongoose from 'mongoos';
+import mongoose from 'mongoose';
 
 const {Schema} = mongoose;
 
@@ -9,6 +9,6 @@ const interviwResultSchema = new Schema({
     resultstatus:String
 });
 
-const interviewResult = mongoose.model(interviewResult,interviwResultSchema);
+const interviewResult = mongoose.model('interviewResult',interviwResultSchema);
 
 export default interviewResult;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Results</title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <h1>Interview Results</h1>
+
+    <!-- Select Interview Form -->
+    <section>
+        <h2>Select Interview</h2>
+        <form id="selectInterviewForm" action="/select-interview" method="POST">
+            <select name="interviewId" id="interviewSelect" required>
+                <% interviews.forEach(interview => { %>
+                    <option value="<%= interview._id %>"><%= interview.company %> - <%= interview.date.toDateString() %></option>
+                <% }); %>
+            </select>
+            <button type="submit">View Students</button>
+        </form>
+    </section>
+
+    <!-- Students List and Result Form -->
+    <% if (students && students.length > 0) { %>
+    <section>
+        <h2>Mark Results for Students</h2>
+        <form id="markResultsForm" action="/mark-results" method="POST">
+            <input type="hidden" name="interviewId" value="<%= selectedInterview._id %>">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach(student => { %>
+                    <tr>
+                        <td><%= student.name %></td>
+                        <td>
+                            <select name="results[<%= student._id %>]">
+                                <option value="PASS">PASS</option>
+                                <option value="FAIL">FAIL</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="Didn’t Attempt">Didn’t Attempt</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <button type="submit">Submit Results</button>
+        </form>
+    </section>
+    <% } %>
+</body>
+</html>
