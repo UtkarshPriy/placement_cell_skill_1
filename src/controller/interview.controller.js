@@ -16,18 +16,30 @@ export default class Interview{
 
     addInterview = async(req,res,next)=>{
         
-        const newInterview = {
-            company: req.body.companyName,
-            interviewDate: req.body.interviewDate
+        const newInterview =  {
+            company:  req.body.companyName,
+            interviewDate:  req.body.interviewDate
         }
-        const student = studentList.find({});
+        const student = await studentList.find({});
+        // console.log(student);
         
-        newInterview.forEach(student => {
-            interviewResult.push({ studentName: student.name, comany: newInterview.company, date:newInterview.interviewDate , resultstatus:'null'});
-                }); 
+        // newInterview.forEach(student => {
+        //     interviewResult.push({ studentName: student.name, comany: newInterview.company, date:newInterview.interviewDate , resultstatus:'null'});
+        //         }); 
+
+        const interviewResults = student.map(student => ({
+            studentName: student.name,
+            company: newInterview.company,
+            date: newInterview.interviewDate,
+            resultstatus: 'null'
+          }));
+        // console.log(interviewResults);
+              
         
         try{
             await interview.create(newInterview);
+            await interviewResult.insertMany(interviewResults);
+
         }catch(err){
             console.log(err); 
         }

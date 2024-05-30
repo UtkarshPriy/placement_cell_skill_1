@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 
 const interviwResultSchema = new Schema({
     studentName: String,
-    comany: String,
+    company: String,
     date: Date,
     resultstatus:String
 });

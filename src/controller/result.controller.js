@@ -7,10 +7,12 @@ export default class Interviewresult{
 
         try{
             const result = await interviewResult.find({});
+            
             console.log(result);
             // const interview = res.comany;
             await res.render('result',{
-                interviews:result
+                interviews:result,
+                students:null
             });
         }catch(err){
             console.log(err);
