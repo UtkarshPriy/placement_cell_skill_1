@@ -39,7 +39,7 @@ app.post('/interview',InterviewCntrl.addInterview);
 app.post('/select-interview',InterviewresultCntrl.showResult);
 app.get('/select-interview',InterviewresultCntrl.showResult);
 app.post('/mark-results',InterviewresultCntrl.addResult);
-
+// app.get('/mark-results',InterviewresultCntrl.addResult);
 
 
 
