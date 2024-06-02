@@ -31,7 +31,7 @@ export default class Interview{
             studentName: student.name,
             company: newInterview.company,
             date: newInterview.interviewDate,
-            resultstatus: 'null'
+            resultstatus: 'awaiting result'
           }));
         // console.log(interviewResults);
               

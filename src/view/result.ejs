@@ -15,21 +15,23 @@
     <section>
         <h2>Select Interview</h2>
         <form id="selectInterviewForm" action="/select-interview" method="POST">
-            <select name="interviewId" id="interviewSelect" required>
+            <select name="company" id="interviewSelect" required>
+                <option value="" disabled selected>Select an interview</option>
                 <% interviews.forEach(interview => { %>
-                    <option value="<%= interview._id %>"><%= interview.company %> - <%= interview.date.toDateString() %></option>
+                    <option value="<%= interview.company %>"><%= interview.company %></option>
                 <% }); %>
             </select>
             <button type="submit">View Students</button>
         </form>
     </section>
+    
 
     <!-- Students List and Result Form -->
     <% if (students && students.length > 0) { %>
     <section>
         <h2>Mark Results for Students</h2>
         <form id="markResultsForm" action="/mark-results" method="POST">
-            <input type="hidden" name="interviewId" value="<%= selectedInterview._id %>">
+            <input type="hidden" name="interviewId" value="<%= students._id %>">
             <table>
                 <thead>
                     <tr>
@@ -40,9 +42,11 @@
                 <tbody>
                     <% students.forEach(student => { %>
                     <tr>
-                        <td><%= student.name %></td>
+                        <td><%= student.studentName %></td>
                         <td>
                             <select name="results[<%= student._id %>]">
+                                <option value="" disabled selected><%=student.resultstatus%></option>
+
                                 <option value="PASS">PASS</option>
                                 <option value="FAIL">FAIL</option>
                                 <option value="On Hold">On Hold</option>

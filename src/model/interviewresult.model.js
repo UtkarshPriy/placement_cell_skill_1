@@ -12,3 +12,7 @@ const interviwResultSchema = new Schema({
 const interviewResult = mongoose.model('interviewResult',interviwResultSchema);
 
 export default interviewResult;
+
+
+
+

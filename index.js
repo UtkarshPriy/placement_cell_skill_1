@@ -38,6 +38,7 @@ app.get('/interview',InterviewCntrl.interviewForm);
 app.post('/interview',InterviewCntrl.addInterview);
 app.post('/select-interview',InterviewresultCntrl.showResult);
 app.get('/select-interview',InterviewresultCntrl.showResult);
+app.post('/mark-results',InterviewresultCntrl.addResult);
 
 
 
