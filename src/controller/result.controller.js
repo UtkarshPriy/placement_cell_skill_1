@@ -10,6 +10,7 @@ export default class Interviewresult{
             const result = await interviewResult.find({}).distinct('company');
             // const result = await interviewResult.find({ company: { $in: distinctCompanies } }).select('company _id');
             const result2 = result.map(item => ({ company: item }));
+            
 
             // const 
 
@@ -31,6 +32,7 @@ export default class Interviewresult{
 
     addResult = async(req,res,next)=>{
         try{
+            
             const { results = {} } = req.body;
             Object.keys(results).map(async (key) => {
                 const value = results[key];

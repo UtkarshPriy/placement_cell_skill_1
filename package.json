@@ -13,8 +13,10 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-csv": "^0.6.0",
+    "i": "^0.3.7",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.0"
+    "mongoose": "^8.4.0",
+    "npm": "^10.8.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.1"

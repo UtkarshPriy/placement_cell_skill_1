@@ -17,7 +17,7 @@ export default class StudentController {
         // console.log(req.body);
         let newStudent = {
             batch: req.body.batch,
-            name: req.body.name,
+            name: req.body.studentName,
             college: req.body.college,
             status: req.body.status,
             dsascore: req.body.dsaScore,

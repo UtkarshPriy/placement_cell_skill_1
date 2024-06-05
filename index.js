@@ -8,8 +8,7 @@ import db from './src/config/mongoose.js';
 import Interview from './src/controller/interview.controller.js';
 import Interviewresult from './src/controller/result.controller.js';
 import generateCsv from './src/middleware/csvgenerator.middleware.js'
-// import stringify from 'csv-stringify';
-
+// import jsonwebtoken from 'jsonwebtoken' ;
 
 
 
@@ -41,7 +40,7 @@ app.post('/interview',InterviewCntrl.addInterview);
 app.post('/select-interview',InterviewresultCntrl.showResult);
 app.get('/select-interview',InterviewresultCntrl.showResult);
 app.post('/mark-results',InterviewresultCntrl.addResult);
-app.get('/extract-csv',InterviewresultCntrl.addResult);
+app.get('/extract-csv',generateCsv);
 
 
 

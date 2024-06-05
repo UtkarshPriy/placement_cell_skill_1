@@ -28,7 +28,7 @@ export default class Interview{
         //         }); 
 
         const interviewResults = student.map(student => ({
-            studentName: student.name,
+            studentName: student.studentName,
             company: newInterview.company,
             date: newInterview.interviewDate,
             resultstatus: 'awaiting result'
