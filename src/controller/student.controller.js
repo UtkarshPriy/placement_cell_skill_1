@@ -14,19 +14,20 @@ export default class StudentController {
     }
 
     addStudent = async (req, res,next) => {
-        // console.log(req.body);
         let newStudent = {
             batch: req.body.batch,
-            name: req.body.studentName,
+            name: req.body.name,
             college: req.body.college,
             status: req.body.status,
             dsascore: req.body.dsaScore,
             webdscore: req.body.webdScore,
             reactscore: req.body.reactScore
         }
+        console.log(newStudent);
+
 
         try{
-            console.log(newStudent);
+            // console.log(newStudent);
             await studentList.create(newStudent)
         }
         catch(err){

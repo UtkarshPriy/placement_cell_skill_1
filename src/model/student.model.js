@@ -5,7 +5,7 @@ const{Schema} = mongoose;
 
 const studentSchema = new Schema({
     batch: String,
-    studentName: String,
+    name: String,
     college:String,
     status:String,
     dsascore: Number,

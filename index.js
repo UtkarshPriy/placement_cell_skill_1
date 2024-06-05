@@ -8,6 +8,7 @@ import db from './src/config/mongoose.js';
 import Interview from './src/controller/interview.controller.js';
 import Interviewresult from './src/controller/result.controller.js';
 import generateCsv from './src/middleware/csvgenerator.middleware.js'
+
 // import jsonwebtoken from 'jsonwebtoken' ;
 
 
@@ -29,6 +30,7 @@ app.use(urlencoded({
 const StudentCntrl = new StudentController();
 const UserCntrl = new UserController();
 const InterviewCntrl = new Interview();
+
 const InterviewresultCntrl =  new Interviewresult();
 app.get('/', UserCntrl.signIn); // Same for user Friendly
 app.get('/signIn', UserCntrl.signIn);
@@ -41,6 +43,9 @@ app.post('/select-interview',InterviewresultCntrl.showResult);
 app.get('/select-interview',InterviewresultCntrl.showResult);
 app.post('/mark-results',InterviewresultCntrl.addResult);
 app.get('/extract-csv',generateCsv);
+app.post('/signUp',UserCntrl.signUpStore);
+
+
 
 
 
