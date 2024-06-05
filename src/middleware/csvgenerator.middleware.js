@@ -45,7 +45,6 @@ async function generateCsv(req, res, next) {
                 'React Final Score': item.reactscore,
                 'interview date': item.date.toLocaleDateString(),
                 'interview company': item.company,
-                // 'interview student': item.studentName, -- already included above
                 'result': item.resultstatus,
 
             })); 
