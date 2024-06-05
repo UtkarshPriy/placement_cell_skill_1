@@ -1,5 +1,5 @@
 // import expressCsv from  'express-csv';
-import expressCsv from 'express-csv';
+import csv from 'csv-express';
 // import express from 'express';
 import interviewResult from '../model/interviewresult.model.js';
 import studentList from '../model/student.model.js';
@@ -45,7 +45,7 @@ async function generateCsv(req, res, next) {
                 'React Final Score': item.reactscore,
                 'interview date': item.date.toLocaleDateString(),
                 'interview company': item.company,
-                'interview student': item.studentName,
+                // 'interview student': item.studentName, -- already included above
                 'result': item.resultstatus,
 
             })); 
