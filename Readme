@@ -1,0 +1,66 @@
+Certainly! Here is a concise README file for the given project:
+
+---
+
+# Placement Cell Skill 1
+
+This project is a web application for maintaining a database of student interviews, allowing employees to fill in data and download it in CSV format.
+
+## Features
+- **Sign Up and Sign In** for employees
+- **Student Management**: List and add new students
+- **Interview Management**: List and create new interviews
+- **Allocate Interviews**: Assign students to interviews
+- **Results Management**: Mark results for students in interviews
+- **CSV Export**: Download complete data in CSV format
+
+## Folder Structure
+- **src**
+  - **config**: Database configuration
+  - **controller**: Controllers for handling requests
+  - **middleware**: Middleware for authentication and CSV generation
+  - **model**: Database models
+  - **public**: Static files
+  - **view**: EJS templates for rendering pages
+
+## Setup
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/UtkarshPriy/placement_cell_skill_1.git
+   cd placement_cell_skill_1
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Configure the database** in `src/config/mongoose.js`.
+4. **Run the application**:
+   ```bash
+   npm start
+   ```
+5. **Access the application** at `http://localhost:3000`.
+
+## Dependencies
+- Express
+- Mongoose
+- EJS
+- jsonwebtoken
+- cookie-parser
+
+## Usage
+- **Sign In** at `/signIn`
+- **Sign Up** at `/signUp`
+- **Manage Students** at `/student`
+- **Manage Interviews** at `/interview`
+- **Download CSV** at `/extract-csv`
+
+## Authentication
+- **Sign In**: Generates a JWT token stored in cookies
+- **Authenticate**: Middleware verifies JWT token
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+For detailed setup and configuration, please refer to the [repository](https://github.com/UtkarshPriy/placement_cell_skill_1).
