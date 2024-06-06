@@ -21,12 +21,7 @@ export default class Interview{
             interviewDate:  req.body.interviewDate
         }
         const student = await studentList.find({});
-        // console.log(student);
         
-        // newInterview.forEach(student => {
-        //     interviewResult.push({ studentName: student.name, comany: newInterview.company, date:newInterview.interviewDate , resultstatus:'null'});
-        //         }); 
-
         const interviewResults = student.map(student => ({
             studentName: student.name,
             company: newInterview.company,

@@ -25,6 +25,8 @@ export default class UserController {
         }catch(err){
             console.log(err);
         }
+
+        res.status(201).render('storeStudentDetails')
         
 
         
