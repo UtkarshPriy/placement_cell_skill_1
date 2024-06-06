@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 import userList from '../model/user.model.js';
 const privateKey = 'absacusjek125';
+import cookieParser from 'cookie-parser';
 
 
 export default class Authentication {
 
-    signIn =  (req, res, next) => {
+    signIn = async (req, res) => {
 
         const {
             username,
@@ -13,14 +14,15 @@ export default class Authentication {
         } = req.body;
         try {
             // Check Creds
-            const user =  userList.findOne({
+            const user = await userList.findOne({
                 name: username,
                 password: password
             });
+            console.log(user);
 
             // const user = await userList.find((user)=> user.name === username && user.password === password);
             if (!user) {
-                res.status(401).send('Invalid Creds');
+                res.status(401).render('signIn');
             } else {
                 // Create Token
 
@@ -34,11 +36,13 @@ export default class Authentication {
                     }
                 );
                 // Return Token
+
                 
-                // return token;
-                next();
-                return res.status(201).send(token);
-                
+                // return res.cookie('jwt', token, { httpOnly: true }).status(201).send('Token stored as cookie');
+                return res.cookie('jwt', token, {
+                    httpOnly: true
+                }).status(201).render('storeStudentDetails');
+
 
             }
         } catch (error) {
@@ -48,24 +52,41 @@ export default class Authentication {
 
 
     }
+    signOut = (req, res) => {
+        res.cookie('jwt', '', {
+            httpOnly: true,
+            expires: new Date(0)
+        });
+        return res.status(200).render('signIn');
+
+    }
+
 
     authenticateToken = (req, res, next) => {
 
         // Reading token
-        const token = req.headers['authorization'];
+        // const token = req.headers['authorization'];
+        const token = req.cookies['jwt'];
 
-        // If no token return error
-        if (!token) {
-            return res.status(401).render('signIn');
-        }
-       // Validating token
         try {
-            jwt.verify(token, privateKey);
+            // If no token return error
+            if (!token) {
+                return res.status(401).render('signIn');
+            }
+            // Validating token
+            try {
+                jwt.verify(token, privateKey);
+            } catch (error) {
+                res.status(401).send('Unauthorized');
+            }
+            // calling next function 
+            next();
         } catch (error) {
-            res.status(401).send('Unauthorized');
+            console.log('test' + error);
+            res.status(401).render('signIn');
         }
-        // calling next function 
-        next();
+
+
 
     }
 

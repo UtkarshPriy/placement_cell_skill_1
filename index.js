@@ -8,7 +8,9 @@ import db from './src/config/mongoose.js';
 import Interview from './src/controller/interview.controller.js';
 import Interviewresult from './src/controller/result.controller.js';
 import generateCsv from './src/middleware/csvgenerator.middleware.js';
-import Authentication from './src//middleware/authentication.middleware.js'
+import Authentication from './src//middleware/authentication.middleware.js';
+import cookieParser from 'cookie-parser';
+
 
 // import jsonwebtoken from 'jsonwebtoken' ;
 
@@ -26,6 +28,7 @@ app.use(express.static(path.join(path.resolve(), 'src', 'public')));
 app.use(urlencoded({
     extended: true
 }));
+app.use(cookieParser());
 
 
 const StudentCntrl = new StudentController();
@@ -35,35 +38,20 @@ const Auth = new Authentication();
 const InterviewresultCntrl =  new Interviewresult();
 
 
-// app.get('/', UserCntrl.signIn); // Same for user Friendly
-// app.get('/signIn', UserCntrl.signIn);
-// app.get('/signUp', UserCntrl.signUp);
-// app.get('/student',Auth.authenticateToken, StudentCntrl.StudentHome);
-// app.post('/student',Auth.authenticateToken, StudentCntrl.addStudent);
-// app.get('/interview',Auth.authenticateToken,InterviewCntrl.interviewForm);
-// app.post('/interview',Auth.authenticateToken,InterviewCntrl.addInterview);
-// app.post('/select-interview',Auth.authenticateToken,InterviewresultCntrl.showResult);
-// app.get('/select-interview',Auth.authenticateToken,InterviewresultCntrl.showResult);
-// app.post('/mark-results',Auth.authenticateToken,InterviewresultCntrl.addResult);
-// app.get('/extract-csv',Auth.authenticateToken,generateCsv);
-// app.post('/signUp',UserCntrl.signUpStore);
-// app.post('/signIn',Auth.signIn,StudentCntrl.StudentHome);
-
-
-
 app.get('/', UserCntrl.signIn); // Same for user Friendly
 app.get('/signIn', UserCntrl.signIn);
 app.get('/signUp', UserCntrl.signUp);
-app.get('/student', StudentCntrl.StudentHome);
-app.post('/student', StudentCntrl.addStudent);
-app.get('/interview',InterviewCntrl.interviewForm);
-app.post('/interview',InterviewCntrl.addInterview);
-app.post('/select-interview',InterviewresultCntrl.showResult);
-app.get('/select-interview',InterviewresultCntrl.showResult);
-app.post('/mark-results',InterviewresultCntrl.addResult);
-app.get('/extract-csv',generateCsv);
+app.get('/student',Auth.authenticateToken, StudentCntrl.StudentHome);
+app.post('/student',Auth.authenticateToken, StudentCntrl.addStudent);
+app.get('/interview',Auth.authenticateToken,InterviewCntrl.interviewForm);
+app.post('/interview',Auth.authenticateToken,InterviewCntrl.addInterview);
+app.post('/select-interview',Auth.authenticateToken,InterviewresultCntrl.showResult);
+app.get('/select-interview',Auth.authenticateToken,InterviewresultCntrl.showResult);
+app.post('/mark-results',Auth.authenticateToken,InterviewresultCntrl.addResult);
+app.get('/extract-csv',Auth.authenticateToken,generateCsv);
 app.post('/signUp',UserCntrl.signUpStore);
-app.post('/signIn',Auth.signIn,StudentCntrl.StudentHome);
+app.post('/signIn',Auth.signIn);
+app.get('/signOut',Auth.signOut);
 
 
 
