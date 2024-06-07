@@ -32,7 +32,7 @@ export default class Authentication {
                     },
 
                     privateKey, {
-                        expiresIn: '1h'
+                        expiresIn: 10
                     }
                 );
                 // Return Token
@@ -64,11 +64,13 @@ export default class Authentication {
 
     authenticateToken = (req, res, next) => {
 
-        // Reading token
-        // const token = req.headers['authorization'];
-        const token = req.cookies['jwt'];
+        
 
         try {
+            // Reading token
+            // const token = req.headers['authorization'];
+            const token = req.cookies['jwt'];
+
             // If no token return error
             if (!token) {
                 return res.status(401).render('signIn');
@@ -77,7 +79,7 @@ export default class Authentication {
             try {
                 jwt.verify(token, privateKey);
             } catch (error) {
-                res.status(401).send('Unauthorized');
+                res.status(401).render('signIn');
             }
             // calling next function 
             next();
