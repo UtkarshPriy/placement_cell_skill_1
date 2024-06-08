@@ -32,7 +32,7 @@ export default class Authentication {
                     },
 
                     privateKey, {
-                        expiresIn: 10
+                        expiresIn: '1h'
                     }
                 );
                 // Return Token
