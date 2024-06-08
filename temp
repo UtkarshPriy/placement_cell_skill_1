@@ -1,0 +1,79 @@
+import jwt from 'jsonwebtoken';
+import userList from '../model/user.model.js';
+import cookieParser from 'cookie-parser';
+
+const privateKey = process.env.JWT_SECRET; //'absacusjek125';
+
+export default class Authentication {
+
+    signIn = async (req, res) => {
+        const {
+            username,
+            password
+        } = req.body;
+        try {
+            // Check credentials
+            const user = await userList.findOne({
+                name: username,
+                password: password
+            });
+            if (!user) {
+                // If user not found, render sign-in page
+                return res.status(401).render('signIn'); //added
+            } else {
+                // Create JWT token
+                let token = jwt.sign({
+                        userID: user.username,
+                        userEmail: user.mail_id
+                    },
+                    privateKey, {
+                        expiresIn: '1h'
+                    }
+                );
+                // Set token in cookie and render the next page
+                return res.cookie('jwt', token, {
+                    httpOnly: true
+                }).status(201).render('storeStudentDetails');
+            }
+        } catch (error) {
+            console.log(error);
+            // Handle server error
+            return res.status(500).send('Internal Server Error');
+        }
+    }
+
+    signOut = (req, res) => {
+        // Clear JWT cookie
+        res.cookie('jwt', '', {
+            httpOnly: true,
+            expires: new Date(0)
+        });
+        return res.status(200).render('signIn');
+    }
+
+    authenticateToken = (req, res, next) => {
+        try {
+            // Read token from cookies
+            const token = req.cookies['jwt'];
+
+            // If no token, render sign-in page
+            if (!token) {
+                return res.status(401).render('signIn');
+            }
+
+            // Validate token
+            try {
+                jwt.verify(token, privateKey);
+            } catch (error) {
+                // If token is invalid, render sign-in page
+                return res.status(401).render('signIn');
+            }
+
+            // Proceed to the next middleware function
+            next();
+        } catch (error) {
+            console.log('Authentication error: ' + error);
+            return res.status(401).render('signIn');
+        }
+    }
+}
