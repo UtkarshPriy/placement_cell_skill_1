@@ -5,7 +5,7 @@ import app from './index.js';
 
 
 
-const port = 2020;
+const port = 443;
 
 app.listen(port,()=>{
     console.log(`server is up on ${port}`);
