@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import userList from '../model/user.model.js';
-const privateKey = 'absacusjek125';
+const privateKey = process.env.JWT_SECRET;  //'absacusjek125';
 import cookieParser from 'cookie-parser';
 
 

@@ -1,3 +1,4 @@
+import './env.js';
 import express from 'express';
 import{urlencoded} from 'express';
 import path from 'path';
