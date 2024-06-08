@@ -23,7 +23,7 @@ export default class StudentController {
             webdscore: req.body.webdScore,
             reactscore: req.body.reactScore
         }
-        console.log(newStudent);
+        // console.log(newStudent);
 
 
         try{

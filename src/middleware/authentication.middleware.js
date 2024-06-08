@@ -22,7 +22,7 @@ export default class Authentication {
 
             // const user = await userList.find((user)=> user.name === username && user.password === password);
             if (!user) {
-                res.status(401).render('signIn');
+                return res.status(401).render('signIn');
             } else {
                 // Create Token
 
@@ -62,7 +62,7 @@ export default class Authentication {
     }
 
 
-    authenticateToken = (req, res, next) => {
+    authenticateToken = (req, res) => {
 
         
 
@@ -82,7 +82,7 @@ export default class Authentication {
                 res.status(401).render('signIn');
             }
             // calling next function 
-            next();
+        
         } catch (error) {
             console.log('test' + error);
             res.status(401).render('signIn');
