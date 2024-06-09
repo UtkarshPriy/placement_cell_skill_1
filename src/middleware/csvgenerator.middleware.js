@@ -10,8 +10,7 @@ async function generateCsv(req, res, next) {
         try{
             let tableStudent = await studentList.find({}).lean();
         let tableResult =  await interviewResult.find({}).lean();
-        // console.log(tableStudent);
-        // console.log(tableResult);
+        
 
 
         
@@ -21,7 +20,7 @@ async function generateCsv(req, res, next) {
             const  matched = tableResult.find((item2)=>{
                 return item1.name === item2.studentName; 
             });
-        // console.log(item1);
+        
 
             if(matched){
                 return {...item1,...matched}
@@ -32,8 +31,7 @@ async function generateCsv(req, res, next) {
         }).filter(item => item !== undefined); // Remove undefined entries
         // console.log(fetchedData);
 
-        // let fetchedData = await data1.find({}).lean();
-
+        
         let data = fetchedData.map(item => ({
 
                 'student id': item._id, // taking result _id  by default
@@ -43,12 +41,12 @@ async function generateCsv(req, res, next) {
                 'DSA Final Score': item.dsascore,
                 'WebD Final Score': item.webdscore,
                 'React Final Score': item.reactscore,
-                'interview date': item.date.toLocaleDateString(),
+                'interview date': item.date ? item.date.toLocaleDateString() : 'N/A',
                 'interview company': item.company,
                 'result': item.resultstatus,
 
             })); 
-            console.log(data);
+            // console.log(data);
             res.status(200).csv(data, true);
 
         }catch(err){

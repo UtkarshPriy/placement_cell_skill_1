@@ -62,7 +62,7 @@ export default class Authentication {
     }
 
 
-    authenticateToken = (req, res) => {
+    authenticateToken = (req, res, next) => {
 
         
 
@@ -78,11 +78,12 @@ export default class Authentication {
             // Validating token
             try {
                 jwt.verify(token, privateKey);
+                next();
             } catch (error) {
                 res.status(401).render('signIn');
             }
             // calling next function 
-        
+            
         } catch (error) {
             console.log('test' + error);
             res.status(401).render('signIn');
